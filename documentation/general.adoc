@@ -1,0 +1,35 @@
+= Documentation
+
+:sectnums:
+== Conception fonctionnelle
+Faire un jeu de questions/réponses. Il y aura plusieurs catégories de question (les Topics). Chaque question a entre 2 et 4 réponses possible.
+Le joueur doit simplement sélectionner la réponse qu'il juge être la meilleure. Une fois que le joueur a répondu, les statistiques de la questions
+s'affichent (statistiques = le pourcentage par réponse).
+
+== Conception technique
+=== Technologies
+* Spring Boot 2
+* PostgreSQL 10
+
+=== Objectifs
+* Utiliser les différentes possibilités qu'offre Spring Boot pour les DAO (JpaRepository, @Query, ...)
+
+=== Base de données
+(réf.: `_src > main > sql > init > init-db.sql_`)
+
+Les tables:
+
+* topic
+* question
+* answer
+
+
+=== Webservices
+`_/best-choice_`::
+* `/topic-list`
+* `/question-list-by-notopic`
+* `/answer-list-by-noquestion`
+
+=== DAO
+`QuestionDao`:: Exemple de DAO où les queries sont définies par le nom de la méthode
+`AnswerDao`:: Exemple de DAO où les queries sont définies dans l'annotation @Query
