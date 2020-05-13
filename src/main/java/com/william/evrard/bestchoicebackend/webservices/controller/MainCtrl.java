@@ -1,10 +1,10 @@
 package com.william.evrard.bestchoicebackend.webservices.controller;
 
-import com.william.evrard.bestchoicebackend.model.dto.ParametreSimpleDto;
-import com.william.evrard.bestchoicebackend.webservices.exception.CustomApiException;
-import com.william.evrard.bestchoicebackend.webservices.service.MainSrv;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import com.william.evrard.bestchoicebackend.model.dto.*;
+import com.william.evrard.bestchoicebackend.webservices.exception.*;
+import com.william.evrard.bestchoicebackend.webservices.service.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,6 +13,9 @@ public class MainCtrl {
 
     @Autowired
     private MainSrv mainSrv;
+
+    @GetMapping("/test")
+    public String test() { return "Hello world ! The test is working :)"; }
 
     /******************** Topic *************************/
     @PostMapping("/topic-list")

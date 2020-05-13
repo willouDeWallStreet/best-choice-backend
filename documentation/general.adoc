@@ -49,7 +49,7 @@ Pour créer notre image docker pour notre base de données PostgreSQL:
 
 Pour faire un premier build de notre application _**best-choice-backend**_:
 
-* Pour créer la docker image (doit se faire à la racine du projet, car c'est là qu'il y a le Dockerfile): `docker build . -t best-choice-backend`
+* Pour créer la docker image (doit se faire à la racine du projet, car c'est là qu'il y a le Dockerfile): `docker build -t best-choice-backend .`
 * Pour voir les docker images: `docker images`
 * Pour démarrer l'image docker et la relier à l'image docker de postgres: `docker run -p 8080:8080 --name best-choice-backend --link best-choice-psql-db:postgres -d best-choice-backend`
 * Pour voir les docker container: `docker container ls`
