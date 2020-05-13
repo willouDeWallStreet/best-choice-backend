@@ -1,0 +1,31 @@
+## Voir
+docker images
+docker container ls
+
+
+## Start for the first time
+docker run -p 5432:5432 --name best-choice-psql-db -e POSTGRES_PASSWORD=william -d postgres
+docker run -p 8080:8080 --name best-choice-backend --link best-choice-psql-db:postgres -d best-choice-backend
+docker container ls
+
+
+## Start for the first time
+docker start best-choice-backend
+docker start best-choice-psql-db
+docker container ls
+
+
+## Stop
+docker stop best-choice-backend
+docker stop best-choice-psql-db
+docker container ls
+
+
+## Pour re-dockeriser l'app
+--> mvn clean install
+docker stop best-choice-backend
+docker container rm best-choice-backend
+docker build -t best-choice-backend .
+docker run -p 8080:8080 --name best-choice-backend --link best-choice-psql-db:postgres -d best-choice-backend
+
+
