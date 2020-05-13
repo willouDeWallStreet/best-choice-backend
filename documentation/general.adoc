@@ -36,7 +36,7 @@ Les tables:
 `AnswerDao`:: Exemple de DAO où les queries sont définies dans l'annotation @Query
 
 === Docker
-Remarque: changer le host de la DB dans les properties du back: `jdbc:postgresql://localhost:5432/games_app` -> `jdbc:postgresql://best-choice-psql-db:5432/games_app`
+Remarque: changer le host de la DB dans les properties du back: `jdbc:postgresql://localhost:5432/games_app` -> `jdbc:postgresql://best-choice-psql-db:5432/games_app` (sur Windows, pour se connecter on utilise: `jdbc:postgresql://192.168.99.100:5432/games_app`)
 
 Pour récupérer les images postgres et :
 
@@ -45,7 +45,15 @@ Pour récupérer les images postgres et :
 
 Pour créer notre image docker pour notre base de données PostgreSQL:
 
-* docker run -p 5432:5432 --name best-choice-psql-db -e POSTGRES_PASSWORD=postgres -d --volumes-from PostgresData postgres
+* `docker run -p 5432:5432 --name best-choice-psql-db -e POSTGRES_PASSWORD=postgres -d --volumes-from PostgresData postgres` (--volumes-from ou -v sert à faire un mapping entre un dossier du container et de la machine local pour run des scripts avec docker cli (host_folder:container_folder), exemple: https://www.youtube.com/watch?v=A8dErdDMqb0)
+
+OU
+
+* `docker run -p 5432:5432 --name best-choice-psql-db -e POSTGRES_PASSWORD=postgres -d postgres`
+
+Pour avoir accès au terminal PSQL (pour créer des DBs, des schémas, des tables, de la data, ...), après démarré le container de la DB:
+
+* `docker exec-it best-choice-psql-db psql -U postgres`
 
 Pour faire un premier build de notre application _**best-choice-backend**_:
 
@@ -55,10 +63,12 @@ Pour faire un premier build de notre application _**best-choice-backend**_:
 * Pour voir les docker container: `docker container ls`
 * Pour les logs d'un docker: `docker logs best-choice-psql-db` ou `docker logs best-choice-backend`
 
+_Remarque:_ L'application sera disponible sous le host: **192.168.99.100** (de la même manière que pour la base de données, spécificité Windows)
+
 Pour rebuild notre application _**best-choice-backend**_:
 
 * On stop: `docker stop best-choice-backend`
 * On supprime le container: `docker container rm container_id` (pour récupérer l'id du container on fait un `docker ps`)
-* On supprime l'image: `docker image rm best-choice-backend`
+* On supprime l'image: `docker image rm best-choice-backend` ou `docker image rm -f best-choice-backend` (pour forcer la suppression)
 * On recrée l'image docker de notre application: `docker build . -t best-choice-backend`
 * On recrée le container de l'app.: `docker run -p 8080:8080 --name best-choice-backend --link best-choice-psql-db:postgres -d best-choice-backend`
