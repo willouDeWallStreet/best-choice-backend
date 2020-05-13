@@ -70,5 +70,5 @@ Pour rebuild notre application _**best-choice-backend**_:
 * On stop: `docker stop best-choice-backend`
 * On supprime le container: `docker container rm container_id` (pour récupérer l'id du container on fait un `docker ps`)
 * On supprime l'image: `docker image rm best-choice-backend` ou `docker image rm -f best-choice-backend` (pour forcer la suppression)
-* On recrée l'image docker de notre application: `docker build . -t best-choice-backend`
+* On recrée l'image docker de notre application: `docker build -t best-choice-backend  .`
 * On recrée le container de l'app.: `docker run -p 8080:8080 --name best-choice-backend --link best-choice-psql-db:postgres -d best-choice-backend`
